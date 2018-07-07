@@ -18,9 +18,18 @@ pageList =  list(open("/home/losphoenix/zhwiki/output/page_outlinks.txt"))
 
 print("File read!")
 
+wid_cate_list = list(open('/home/losphoenix/zhwiki/output/Category.jian.txt', 'r'))
+wid_cate_dict = dict([(i.split()[0], i.split()[2].strip()) for i in wid_cate_list])
+cate_wid_dict = dict([(i.split()[2].strip(), i.split()[0]) for i in wid_cate_list])
+print("wid_cate Loaded")
+
 outList = list()
 for line in categoryList:
     cate1, cate2 = line.split('\t')
+    if cate1 in tabooSet:
+        print("Taboo!", wid_cate_dict[cate1])
+        continue
+
     outList.append([cate1, cate2.strip(), 0])
 
 #cate = 28078

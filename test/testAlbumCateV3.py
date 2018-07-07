@@ -124,7 +124,7 @@ if __name__ == "__main__":
         cnt += 1
         if cnt % 100 == 0:
             print("%d cates Parsed"%(cnt))
-        if pName.find(gStr) >-1 and gHit > 0.5:
+        if pName.find(gStr) >-1 and gHit > 0.7:
             tabooList.append(cate)
 
     tabooSet = set(tabooList)

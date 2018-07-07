@@ -45,27 +45,13 @@ for i in cateOut:
 
 print('inLink Read!!')
 
-#在category_outlinks上遍历，
-#如果发现了圈
-
-
-qlist = [
-    "C语言",
-    "娱乐",
-    "大学",
-    "人工智能",
-    "语文考试",
-    "量子力学",
-    "相对论",
-    "生物系统",
-    "系统生物学",
-    "物理学家"
-]
+qlist = sonList
 
 for qq in qlist:
-    print("=====%s====="%(qq))
-    if qq in cate_wid_dict:
-        inList = sonDict[cate_wid_dict[qq]]
+
+    if True:
+        inList = sonDict[qq]
+        # print("=====%d=====" % (len(inList)))
         try:
             for i in inList:
                 wid = i
@@ -73,6 +59,7 @@ for qq in qlist:
                     name = "Cate: " + wid_cate_dict[wid]
                 else:
                     name = "Page: " + id_ptitle_dict[wid]
-                print(name, model.similarity(wid_id_dict[cate_wid_dict[qq]], wid_id_dict[wid]))
+                print(name, model.similarity(wid_id_dict[qq], wid_id_dict[wid]))
         except:
-            print("Key Error")
+            continue
+        print("=====%s====="%(wid_cate_dict[qq]))

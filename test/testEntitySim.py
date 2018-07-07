@@ -13,7 +13,7 @@ from test.pickleModel import loadAll as lom
 model = lom()
 print("Model Loaded")
 
-wid_id_list = list(open('../data/wikiCate/entity2id.txt', 'r'))
+wid_id_list = list(open('../data/wikiCate2/entity2id.txt', 'r'))
 wid_id_dict = dict([(i.split()[0], i.split()[1].strip()) for i in wid_id_list[1:]])
 id_wid_dict = dict([(i.split()[1].strip(), i.split()[0]) for i in wid_id_list[1:]])
 print("wid_id Loaded")
@@ -42,8 +42,10 @@ qlist = [
 for qq in qlist:
     print("=====%s====="%(qq))
     if not qq in cate_wid_dict:
+        print("Tabooed!")
         continue
     if not cate_wid_dict[qq] in wid_id_dict:
+        print("What?")
         continue
     if wid_id_dict[cate_wid_dict[qq]] in model:
         q = model.most_similar(wid_id_dict[cate_wid_dict[qq]], topn = 20)
@@ -55,4 +57,6 @@ for qq in qlist:
             else:
                 name = "Page: " + id_ptitle_dict[wid]
             print(name, e[1])
+    else:
+        print("not in model?")
     print("==========\n")

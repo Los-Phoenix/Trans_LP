@@ -1,6 +1,6 @@
-oriVec = list(open('../data/wikiCate/entity2vec.vec'))
+oriVec = list(open('../data/wikiCate2/entity2vec.vec'))
 print('File Read')
-outF = open('../data/wikiCate/entity2vec.vec.txt', 'w')
+outF = open('../data/wikiCate2/entity2vec.vec.txt', 'w')
 
 etts = len(oriVec)
 dims = len(oriVec[0].split())

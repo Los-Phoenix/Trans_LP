@@ -9,9 +9,10 @@
 from gensim.models import KeyedVectors
 from test.readpage import loadAll as lop
 from test.pickleModel import loadAll as lom
+from test.testAlbumCateV3 import loadAll as lot
 
-model = lom()
-print("Model Loaded")
+# model = lom()
+# print("Model Loaded")
 
 wid_id_list = list(open('../data/wikiCate2/entity2id.txt', 'r'))
 wid_id_dict = dict([(i.split()[0], i.split()[1].strip()) for i in wid_id_list[1:]])
@@ -23,8 +24,8 @@ wid_cate_dict = dict([(i.split()[0], i.split()[2].strip()) for i in wid_cate_lis
 cate_wid_dict = dict([(i.split()[2].strip(), i.split()[0]) for i in wid_cate_list])
 print("wid_cate Loaded")
 
-titleList, idList, ptitle_id_dict, id_ptitle_dict = lop()
-print("Page Loaded")
+# titleList, idList, ptitle_id_dict, id_ptitle_dict = lop()
+# print("Page Loaded")
 
 cateLink = list(open('/home/losphoenix/zhwiki/output/category_inlinks.txt', 'r'))
 
@@ -45,34 +46,23 @@ for i in cateOut:
 
 print('inLink Read!!')
 
-#在category_outlinks上遍历，
-#如果发现了圈
 
+print(len(wid_cate_dict.keys()))
+print(len(pDict.keys()))
+#在category_outlinks上遍历，打印结果
+#如果发现了圈，打印圈
+#如果发现可疑的扩展，打印扩展
+root = "隐藏分类"
 
-qlist = [
-    "C语言",
-    "娱乐",
-    "大学",
-    "人工智能",
-    "语文考试",
-    "量子力学",
-    "相对论",
-    "生物系统",
-    "系统生物学",
-    "物理学家"
-]
+wid_root = cate_wid_dict[root]
+print(wid_root)
+pl = sonDict[wid_root]
+print(pl)
+for p in pl:
+    print(wid_cate_dict[p])
 
-for qq in qlist:
-    print("=====%s====="%(qq))
-    if qq in cate_wid_dict:
-        inList = sonDict[cate_wid_dict[qq]]
-        try:
-            for i in inList:
-                wid = i
-                if wid in wid_cate_dict:
-                    name = "Cate: " + wid_cate_dict[wid]
-                else:
-                    name = "Page: " + id_ptitle_dict[wid]
-                print(name, model.similarity(wid_id_dict[cate_wid_dict[qq]], wid_id_dict[wid]))
-        except:
-            print("Key Error")
+print("    ")
+pl = pDict[wid_root]
+print(pl)
+for p in pl:
+    print(wid_cate_dict[p])
